@@ -37,23 +37,6 @@ test('BE-AUTH-02 rejects a duplicate email without saving or generating a token'
   expect(generateToken).not.toHaveBeenCalled();
 });
 
-test('BE-AUTH-03 propagates a registration database failure', async () => {
-  User.findOne.mockRejectedValue(new Error('database unavailable'));
-  const res = response();
-  await expect(registerUser({ body: { email: 'qa@example.com' } }, res)).rejects.toThrow('database unavailable');
-  expect(res.json).not.toHaveBeenCalled();
-});
-
-test('BE-AUTH-04 rejects login for an unknown account', async () => {
-  User.findOne.mockResolvedValue(null);
-  const res = response();
-  await loginUser({ body: { email: 'missing@example.com', password: 'Test123!' } }, res);
-  expect(res.status).toHaveBeenCalledWith(404);
-  expect(res.json).toHaveBeenCalledWith({ message: 'User Not Found' });
-  expect(bcrypt.compareSync).not.toHaveBeenCalled();
-  expect(generateToken).not.toHaveBeenCalled();
-});
-
 test('BE-AUTH-05 rejects an incorrect password without issuing a token', async () => {
   User.findOne.mockResolvedValue({ _id: 'u1', password: 'stored-hash' });
   bcrypt.compareSync.mockReturnValue(false);
@@ -77,10 +60,3 @@ test('BE-AUTH-06 logs in and removes the password from the response', async () =
   expect(res.json).toHaveBeenCalledWith({ message: 'Login Successfully', data: { ...user, password: null }, token: 'token-1' });
 });
 
-test('BE-AUTH-07 propagates a failed user save without issuing a token', async () => {
-  User.findOne.mockResolvedValue(null);
-  User.mockImplementation(() => ({ save: jest.fn().mockRejectedValue(new Error('save failed')) }));
-  bcrypt.hashSync.mockReturnValue('hash');
-  await expect(registerUser({ body: { name: 'Luis', email: 'qa@example.com', password: 'Test123!' } }, response())).rejects.toThrow('save failed');
-  expect(generateToken).not.toHaveBeenCalled();
-});

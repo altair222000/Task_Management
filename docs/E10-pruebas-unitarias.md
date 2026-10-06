@@ -22,8 +22,8 @@ sobre el commit original, ejecuta las pruebas con cobertura y comprueba el incre
 La reconstrucción de la base usa Git y tar. En clones poco profundos, ejecutar
 `git fetch --unshallow` antes de medir la base.
 
-Hay 62 pruebas unitarias en este repositorio. El total de ambos es 173
-(62 backend y 111 frontend). Las pruebas de instrumentación en `tests/baseline`
+Hay 15 pruebas unitarias en este repositorio. El total de ambos es 30
+(15 backend y 15 frontend). Las pruebas de instrumentación en `tests/baseline`
 no forman parte de ese total.
 
 ## Línea base de la sección 2.4
