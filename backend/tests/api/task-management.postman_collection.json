@@ -73,7 +73,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 200\", function () { pm.response.to.have.status(200); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"status\",\"database\"],\"properties\":{\"status\":{\"type\":\"string\"},\"database\":{\"type\":\"string\"}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"status\",\"database\"],\"properties\":{\"status\":{\"type\":\"string\"},\"database\":{\"type\":\"string\"}}}); });",
               "pm.test(\"Servicio y MongoDB disponibles\", function () { const body = pm.response.json(); pm.expect(body.status).to.eql(\"ok\"); pm.expect(body.database).to.eql(\"task_management_e11\"); });"
             ]
           }
@@ -118,7 +118,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 200\", function () { pm.response.to.have.status(200); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\",\"token\"],\"properties\":{\"message\":{\"type\":\"string\"},\"token\":{\"type\":\"string\",\"minLength\":1}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\",\"token\"],\"properties\":{\"message\":{\"type\":\"string\"},\"token\":{\"type\":\"string\",\"minLength\":1}}}); });",
               "pm.test(\"Usuario registrado y token recibido\", function () { const body = pm.response.json(); pm.expect(body.message).to.eql(\"Registration Successfully\"); pm.expect(body.token).to.be.a(\"string\").and.not.empty; });"
             ]
           }
@@ -162,7 +162,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 400\", function () { pm.response.to.have.status(400); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\"],\"properties\":{\"message\":{\"type\":\"string\"}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\"],\"properties\":{\"message\":{\"type\":\"string\"}}}); });",
               "pm.test(\"Contenido del rechazo\", function () { pm.expect(pm.response.json().message).to.eql(\"User Already Exist\"); });"
             ]
           }
@@ -206,7 +206,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 200\", function () { pm.response.to.have.status(200); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\",\"data\",\"token\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"name\",\"email\",\"_id\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"board\":{\"type\":\"array\"},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}},\"token\":{\"type\":\"string\",\"minLength\":1}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\",\"data\",\"token\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"name\",\"email\",\"_id\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"board\":{\"type\":\"array\"},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}},\"token\":{\"type\":\"string\",\"minLength\":1}}}); });",
               "pm.test(\"Inicio de sesión devuelve el usuario esperado\", function () { const body = pm.response.json(); pm.expect(body.message).to.eql(\"Login Successfully\"); pm.expect(body.data.email).to.eql(pm.collectionVariables.get(\"email\")); pm.expect(body.data.name).to.eql(pm.collectionVariables.get(\"name\")); pm.expect(body.token).to.be.a(\"string\").and.not.empty; });",
               "pm.collectionVariables.set(\"token\", pm.response.json().token);"
             ]
@@ -260,7 +260,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 404\", function () { pm.response.to.have.status(404); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\"],\"properties\":{\"message\":{\"type\":\"string\"}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\"],\"properties\":{\"message\":{\"type\":\"string\"}}}); });",
               "pm.test(\"Indica que el usuario no existe\", function () { pm.expect(pm.response.json().message).to.eql(\"User Not Found\"); });"
             ]
           }
@@ -304,7 +304,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 401\", function () { pm.response.to.have.status(401); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\"],\"properties\":{\"message\":{\"type\":\"string\"}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\"],\"properties\":{\"message\":{\"type\":\"string\"}}}); });",
               "pm.test(\"Indica que la contraseña es incorrecta\", function () { pm.expect(pm.response.json().message).to.eql(\"Incorrect Password\"); });"
             ]
           }
@@ -348,7 +348,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 404\", function () { pm.response.to.have.status(404); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\"],\"properties\":{\"message\":{\"type\":\"string\"}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\"],\"properties\":{\"message\":{\"type\":\"string\"}}}); });",
               "pm.test(\"Protege el perfil sin credenciales\", function () { pm.expect(pm.response.json().message).to.eql(\"Token not found\"); });"
             ]
           }
@@ -379,7 +379,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 200\", function () { pm.response.to.have.status(200); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"data\"],\"properties\":{\"data\":{\"type\":\"object\",\"required\":[\"name\",\"email\",\"_id\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"board\":{\"type\":\"array\"},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"data\"],\"properties\":{\"data\":{\"type\":\"object\",\"required\":[\"name\",\"email\",\"_id\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"board\":{\"type\":\"array\"},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}); });",
               "pm.test(\"Perfil corresponde a la cuenta creada y no expone contraseña\", function () { const body = pm.response.json(); pm.expect(body.data.email).to.eql(pm.collectionVariables.get(\"email\")); pm.expect(body.data.name).to.eql(pm.collectionVariables.get(\"name\")); pm.expect(body.data).not.to.have.property(\"password\"); });"
             ]
           }
@@ -407,7 +407,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 200\", function () { pm.response.to.have.status(200); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"data\"],\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"name\",\"email\",\"_id\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"board\":{\"type\":\"array\"},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"data\"],\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"name\",\"email\",\"_id\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"board\":{\"type\":\"array\"},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}}); });",
               "pm.test(\"Listado no expone contraseñas\", function () { pm.expect(pm.response.json().data.every(function (user) { return !Object.prototype.hasOwnProperty.call(user, \"password\"); })).to.eql(true); });"
             ]
           }
@@ -435,7 +435,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 200\", function () { pm.response.to.have.status(200); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"title\",\"priority\",\"category\",\"checklist\",\"userName\",\"_id\",\"createdAt\",\"updatedAt\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"title\":{\"type\":\"string\"},\"priority\":{\"type\":\"string\"},\"category\":{\"type\":\"string\"},\"checklist\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"name\",\"isDone\"],\"properties\":{\"name\":{\"type\":\"string\"},\"isDone\":{\"type\":\"boolean\"}}}},\"userName\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"object\",\"required\":[\"name\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}}}]},\"assign\":{\"type\":[\"string\",\"null\"]},\"dueDate\":{\"type\":[\"string\",\"null\"]},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"title\",\"priority\",\"category\",\"checklist\",\"userName\",\"_id\",\"createdAt\",\"updatedAt\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"title\":{\"type\":\"string\"},\"priority\":{\"type\":\"string\"},\"category\":{\"type\":\"string\"},\"checklist\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"name\",\"isDone\"],\"properties\":{\"name\":{\"type\":\"string\"},\"isDone\":{\"type\":\"boolean\"}}}},\"userName\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"object\",\"required\":[\"name\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}}}]},\"assign\":{\"type\":[\"string\",\"null\"]},\"dueDate\":{\"type\":[\"string\",\"null\"]},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}); });",
               "pm.test(\"Tarea creada con los valores esperados\", function () { const body = pm.response.json(); pm.expect(body.message).to.eql(\"success\"); pm.expect(body.data.title).to.eql(pm.collectionVariables.get(\"taskTitle\")); pm.expect(body.data.category).to.eql(\"to-do\"); pm.expect(body.data.priority).to.eql(\"High Priority\"); });",
               "pm.collectionVariables.set(\"taskId\", pm.response.json().data._id);"
             ]
@@ -477,7 +477,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 200\", function () { pm.response.to.have.status(200); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"backlog\",\"todo\",\"inProgress\",\"done\"],\"properties\":{\"backlog\":{\"type\":\"array\"},\"todo\":{\"type\":\"array\"},\"inProgress\":{\"type\":\"array\"},\"done\":{\"type\":\"array\"}}}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"backlog\",\"todo\",\"inProgress\",\"done\"],\"properties\":{\"backlog\":{\"type\":\"array\"},\"todo\":{\"type\":\"array\"},\"inProgress\":{\"type\":\"array\"},\"done\":{\"type\":\"array\"}}}}}); });",
               "pm.test(\"La tarea nueva aparece en To-Do\", function () { const body = pm.response.json(); pm.expect(body.message).to.eql(\"success\"); pm.expect(body.data.todo.some(function (task) { return task._id === pm.collectionVariables.get(\"taskId\"); })).to.eql(true); });"
             ]
           }
@@ -505,7 +505,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 200\", function () { pm.response.to.have.status(200); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"title\",\"priority\",\"category\",\"checklist\",\"userName\",\"_id\",\"createdAt\",\"updatedAt\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"title\":{\"type\":\"string\"},\"priority\":{\"type\":\"string\"},\"category\":{\"type\":\"string\"},\"checklist\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"name\",\"isDone\"],\"properties\":{\"name\":{\"type\":\"string\"},\"isDone\":{\"type\":\"boolean\"}}}},\"userName\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"object\",\"required\":[\"name\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}}}]},\"assign\":{\"type\":[\"string\",\"null\"]},\"dueDate\":{\"type\":[\"string\",\"null\"]},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"title\",\"priority\",\"category\",\"checklist\",\"userName\",\"_id\",\"createdAt\",\"updatedAt\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"title\":{\"type\":\"string\"},\"priority\":{\"type\":\"string\"},\"category\":{\"type\":\"string\"},\"checklist\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"name\",\"isDone\"],\"properties\":{\"name\":{\"type\":\"string\"},\"isDone\":{\"type\":\"boolean\"}}}},\"userName\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"object\",\"required\":[\"name\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}}}]},\"assign\":{\"type\":[\"string\",\"null\"]},\"dueDate\":{\"type\":[\"string\",\"null\"]},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}); });",
               "pm.test(\"Devuelve la tarea creada\", function () { const body = pm.response.json(); pm.expect(body.message).to.eql(\"success\"); pm.expect(body.data._id).to.eql(pm.collectionVariables.get(\"taskId\")); pm.expect(body.data.title).to.eql(pm.collectionVariables.get(\"taskTitle\")); });"
             ]
           }
@@ -533,7 +533,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 200\", function () { pm.response.to.have.status(200); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"title\",\"priority\",\"category\",\"checklist\",\"userName\",\"_id\",\"createdAt\",\"updatedAt\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"title\":{\"type\":\"string\"},\"priority\":{\"type\":\"string\"},\"category\":{\"type\":\"string\"},\"checklist\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"name\",\"isDone\"],\"properties\":{\"name\":{\"type\":\"string\"},\"isDone\":{\"type\":\"boolean\"}}}},\"userName\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"object\",\"required\":[\"name\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}}}]},\"assign\":{\"type\":[\"string\",\"null\"]},\"dueDate\":{\"type\":[\"string\",\"null\"]},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"title\",\"priority\",\"category\",\"checklist\",\"userName\",\"_id\",\"createdAt\",\"updatedAt\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"title\":{\"type\":\"string\"},\"priority\":{\"type\":\"string\"},\"category\":{\"type\":\"string\"},\"checklist\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"name\",\"isDone\"],\"properties\":{\"name\":{\"type\":\"string\"},\"isDone\":{\"type\":\"boolean\"}}}},\"userName\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"object\",\"required\":[\"name\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}}}]},\"assign\":{\"type\":[\"string\",\"null\"]},\"dueDate\":{\"type\":[\"string\",\"null\"]},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}); });",
               "pm.test(\"La tarea cambia a In-Progress\", function () { const body = pm.response.json(); pm.expect(body.message).to.eql(\"success\"); pm.expect(body.data._id).to.eql(pm.collectionVariables.get(\"taskId\")); pm.expect(body.data.category).to.eql(\"in-progress\"); });"
             ]
           }
@@ -574,7 +574,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 200\", function () { pm.response.to.have.status(200); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"backlog\",\"todo\",\"inProgress\",\"done\",\"high\",\"moderate\",\"low\",\"dueDate\"],\"properties\":{\"backlog\":{\"type\":\"number\"},\"todo\":{\"type\":\"number\"},\"inProgress\":{\"type\":\"number\"},\"done\":{\"type\":\"number\"},\"high\":{\"type\":\"number\"},\"moderate\":{\"type\":\"number\"},\"low\":{\"type\":\"number\"},\"dueDate\":{\"type\":\"number\"}}}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"backlog\",\"todo\",\"inProgress\",\"done\",\"high\",\"moderate\",\"low\",\"dueDate\"],\"properties\":{\"backlog\":{\"type\":\"number\"},\"todo\":{\"type\":\"number\"},\"inProgress\":{\"type\":\"number\"},\"done\":{\"type\":\"number\"},\"high\":{\"type\":\"number\"},\"moderate\":{\"type\":\"number\"},\"low\":{\"type\":\"number\"},\"dueDate\":{\"type\":\"number\"}}}}}); });",
               "pm.test(\"Analítica refleja la tarea modificada\", function () { const body = pm.response.json(); pm.expect(body.message).to.eql(\"success\"); pm.expect(body.data.inProgress).to.be.at.least(1); pm.expect(body.data.high).to.be.at.least(1); pm.expect(body.data.dueDate).to.be.at.least(1); });"
             ]
           }
@@ -602,7 +602,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 200\", function () { pm.response.to.have.status(200); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"title\",\"priority\",\"category\",\"checklist\",\"userName\",\"_id\",\"createdAt\",\"updatedAt\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"title\":{\"type\":\"string\"},\"priority\":{\"type\":\"string\"},\"category\":{\"type\":\"string\"},\"checklist\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"name\",\"isDone\"],\"properties\":{\"name\":{\"type\":\"string\"},\"isDone\":{\"type\":\"boolean\"}}}},\"userName\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"object\",\"required\":[\"name\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}}}]},\"assign\":{\"type\":[\"string\",\"null\"]},\"dueDate\":{\"type\":[\"string\",\"null\"]},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"title\",\"priority\",\"category\",\"checklist\",\"userName\",\"_id\",\"createdAt\",\"updatedAt\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"title\":{\"type\":\"string\"},\"priority\":{\"type\":\"string\"},\"category\":{\"type\":\"string\"},\"checklist\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"name\",\"isDone\"],\"properties\":{\"name\":{\"type\":\"string\"},\"isDone\":{\"type\":\"boolean\"}}}},\"userName\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"object\",\"required\":[\"name\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}}}]},\"assign\":{\"type\":[\"string\",\"null\"]},\"dueDate\":{\"type\":[\"string\",\"null\"]},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}); });",
               "pm.test(\"Actualización conserva estado y cambia contenido\", function () { const body = pm.response.json(); pm.expect(body.message).to.eql(\"success\"); pm.expect(body.data.title).to.eql(pm.collectionVariables.get(\"updatedTaskTitle\")); pm.expect(body.data.priority).to.eql(\"Moderate Priority\"); pm.expect(body.data.category).to.eql(\"in-progress\"); });"
             ]
           }
@@ -643,7 +643,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 200\", function () { pm.response.to.have.status(200); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"title\",\"priority\",\"category\",\"checklist\",\"userName\",\"_id\",\"createdAt\",\"updatedAt\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"title\":{\"type\":\"string\"},\"priority\":{\"type\":\"string\"},\"category\":{\"type\":\"string\"},\"checklist\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"name\",\"isDone\"],\"properties\":{\"name\":{\"type\":\"string\"},\"isDone\":{\"type\":\"boolean\"}}}},\"userName\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"object\",\"required\":[\"name\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}}}]},\"assign\":{\"type\":[\"string\",\"null\"]},\"dueDate\":{\"type\":[\"string\",\"null\"]},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"title\",\"priority\",\"category\",\"checklist\",\"userName\",\"_id\",\"createdAt\",\"updatedAt\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"title\":{\"type\":\"string\"},\"priority\":{\"type\":\"string\"},\"category\":{\"type\":\"string\"},\"checklist\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"name\",\"isDone\"],\"properties\":{\"name\":{\"type\":\"string\"},\"isDone\":{\"type\":\"boolean\"}}}},\"userName\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"object\",\"required\":[\"name\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}}}]},\"assign\":{\"type\":[\"string\",\"null\"]},\"dueDate\":{\"type\":[\"string\",\"null\"]},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}); });",
               "pm.test(\"La lectura refleja la actualización\", function () { const body = pm.response.json(); pm.expect(body.data.title).to.eql(pm.collectionVariables.get(\"updatedTaskTitle\")); pm.expect(body.data.priority).to.eql(\"Moderate Priority\"); pm.expect(body.data.category).to.eql(\"in-progress\"); pm.expect(body.data.checklist[0].isDone).to.eql(true); });"
             ]
           }
@@ -671,7 +671,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 404\", function () { pm.response.to.have.status(404); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\"],\"properties\":{\"message\":{\"type\":\"string\"}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\"],\"properties\":{\"message\":{\"type\":\"string\"}}}); });",
               "pm.test(\"Ruta protegida rechaza la solicitud anónima\", function () { pm.expect(pm.response.json().message).to.eql(\"Token not found\"); });"
             ]
           }
@@ -702,7 +702,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 200\", function () { pm.response.to.have.status(200); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"title\",\"priority\",\"category\",\"checklist\",\"userName\",\"_id\",\"createdAt\",\"updatedAt\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"title\":{\"type\":\"string\"},\"priority\":{\"type\":\"string\"},\"category\":{\"type\":\"string\"},\"checklist\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"name\",\"isDone\"],\"properties\":{\"name\":{\"type\":\"string\"},\"isDone\":{\"type\":\"boolean\"}}}},\"userName\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"object\",\"required\":[\"name\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}}}]},\"assign\":{\"type\":[\"string\",\"null\"]},\"dueDate\":{\"type\":[\"string\",\"null\"]},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":\"object\",\"required\":[\"title\",\"priority\",\"category\",\"checklist\",\"userName\",\"_id\",\"createdAt\",\"updatedAt\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"title\":{\"type\":\"string\"},\"priority\":{\"type\":\"string\"},\"category\":{\"type\":\"string\"},\"checklist\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\":[\"name\",\"isDone\"],\"properties\":{\"name\":{\"type\":\"string\"},\"isDone\":{\"type\":\"boolean\"}}}},\"userName\":{\"oneOf\":[{\"type\":\"string\"},{\"type\":\"object\",\"required\":[\"name\"],\"properties\":{\"_id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}}}]},\"assign\":{\"type\":[\"string\",\"null\"]},\"dueDate\":{\"type\":[\"string\",\"null\"]},\"createdAt\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\"}}}}}); });",
               "pm.test(\"Se elimina la tarea del flujo\", function () { const body = pm.response.json(); pm.expect(body.message).to.eql(\"success\"); pm.expect(body.data._id).to.eql(pm.collectionVariables.get(\"taskId\")); });"
             ]
           }
@@ -730,7 +730,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 200\", function () { pm.response.to.have.status(200); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":[\"object\",\"null\"]}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"message\",\"data\"],\"properties\":{\"message\":{\"type\":\"string\"},\"data\":{\"type\":[\"object\",\"null\"]}}}); });",
               "pm.test(\"La tarea eliminada ya no existe\", function () { const body = pm.response.json(); pm.expect(body.message).to.eql(\"success\"); pm.expect(body.data).to.eql(null); });"
             ]
           }
@@ -758,7 +758,7 @@
             "exec": [
               "pm.test(\"Estado HTTP 404\", function () { pm.response.to.have.status(404); });",
               "pm.test(\"Content-Type JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\") || \"\").to.include(\"application/json\"); });",
-              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"required\":[\"error\"],\"properties\":{\"error\":{\"type\":\"string\"}}}); });",
+              "pm.test(\"Esquema de respuesta\", function () { pm.response.to.have.jsonSchema({\"type\":\"object\",\"required\":[\"error\"],\"properties\":{\"error\":{\"type\":\"string\"}}}); });",
               "pm.test(\"La API responde con el mensaje de ruta inexistente\", function () { pm.expect(pm.response.json().error).to.eql(\"Invalid Route\"); });"
             ]
           }
