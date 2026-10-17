@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - main
+      - feature/e12-SonarQube
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
