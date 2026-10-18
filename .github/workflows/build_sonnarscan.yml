@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - feature/e12-SonarQube
+      - dev
+      - release
+      - main
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
