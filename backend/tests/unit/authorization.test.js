@@ -12,7 +12,7 @@ test('BE-ACCESS-01 rejects a missing Authorization header', async () => {
   const res = response(), next = jest.fn();
   authorization({ headers: {} }, res, next);
   await flush();
-  expect(res.status).toHaveBeenCalledWith(404);
+  expect(res.status).toHaveBeenCalledWith(401);
   expect(res.send).toHaveBeenCalledWith({ message: 'Token not found' });
   expect(next).not.toHaveBeenCalled();
   expect(User.findById).not.toHaveBeenCalled();
@@ -34,3 +34,55 @@ test('BE-ACCESS-03 attaches the user excluding its password', async () => {
   expect(res.send).not.toHaveBeenCalled();
 });
 
+
+describe('Rechazo de credenciales inválidas', () => {
+  test.each([
+    ['esquema Basic', 'Basic credenciales'],
+    ['token vacío', 'Bearer   '],
+    ['encabezado no textual', { token: 'incorrecto' }],
+  ])('rechaza %s', async (_caso, authorizationHeader) => {
+    const res = response(), next = jest.fn();
+    authorization({ headers: { authorization: authorizationHeader } }, res, next);
+    await flush();
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.send).toHaveBeenCalledWith({ message: 'Token not found' });
+    expect(next).not.toHaveBeenCalled();
+    expect(User.findById).not.toHaveBeenCalled();
+  });
+
+  test('rechaza un token con firma incorrecta', async () => {
+    getUserIdFromToken.mockImplementation(() => { throw new Error('invalid signature'); });
+    const res = response(), next = jest.fn();
+    authorization({ headers: { authorization: 'Bearer token-alterado' } }, res, next);
+    await flush();
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.send).toHaveBeenCalledWith({ message: 'Invalid token' });
+    expect(next).not.toHaveBeenCalled();
+    expect(User.findById).not.toHaveBeenCalled();
+  });
+
+  test('rechaza un token sin identificador de usuario', async () => {
+    getUserIdFromToken.mockReturnValue(null);
+    const res = response(), next = jest.fn();
+    authorization({ headers: { authorization: 'Bearer token-sin-usuario' } }, res, next);
+    await flush();
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.send).toHaveBeenCalledWith({ message: 'Invalid token' });
+    expect(next).not.toHaveBeenCalled();
+    expect(User.findById).not.toHaveBeenCalled();
+  });
+
+  test('rechaza un token de un usuario eliminado', async () => {
+    getUserIdFromToken.mockReturnValue('eliminado');
+    const select = jest.fn().mockResolvedValue(null);
+    User.findById.mockReturnValue({ select });
+    const res = response(), next = jest.fn();
+    authorization({ headers: { authorization: 'Bearer token-valido' } }, res, next);
+    await flush();
+    expect(User.findById).toHaveBeenCalledWith('eliminado');
+    expect(select).toHaveBeenCalledWith('-password');
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.send).toHaveBeenCalledWith({ message: 'User not found' });
+    expect(next).not.toHaveBeenCalled();
+  });
+});
